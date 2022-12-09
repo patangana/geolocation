@@ -27,8 +27,4 @@ pipeline {
                 sh 'deploy'
             }
         }
-
-            
-                
-                
-   
+}
