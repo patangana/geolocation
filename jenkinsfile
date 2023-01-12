@@ -7,18 +7,13 @@ pipeline {
     tools{
         maven 'M2_HOME'
     }
-    environment {
-    registry = '119729913111.dkr.ecr.us-east-1.amazonaws.com/jenkins-ecr'
-    registryCredential = 'jenkins-ecr'
-    dockerimage = ''
-  }
     stages {
-        stage('Checkout'){
+        stage('checkout'){
             steps{
-                git branch: 'jenk-ecr', url: 'https://github.com/patangana/geolocation.git'
+                git branch 'jenk-eks-ecr', url: 'https://github.com/patangana/geolocation.git'
             }
         }
-        stage('Code Build') {
+        stage('code build') {
             steps {
                 sh 'mvn clean package'
             }
@@ -28,21 +23,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Build Image') {
-            steps {
-                script{
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                } 
-            }
-        }
-        stage('Deploy image') {
-            steps{
-                script{ 
-                    docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }  
     }
+     
 }
