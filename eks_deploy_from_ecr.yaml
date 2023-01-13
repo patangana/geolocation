@@ -1,0 +1,31 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1ERXhNakl4TlRVME1Wb1hEVE16TURFd09USXhOVFUwTVZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTnJoCmRWQ2Z2aDQzTldkWHNZcjZVS3lySGtXVG5YZzVSU1Zqb3o2elpSRkNHVWd3TVdHZUdVM1NEWUdidVlMdC9Qb3AKd3hYOGI0ZkVXUDBMSk5pSHRrdHIyQlhXOUlBWkpXWG9hYlJNVWd2VGFZNEFobmwxRnM5bkxrSzhEUkUvUkZBRApRVFRKb1I5NEpQMkZHRnphQ2laQ29sYUNGWkJ2bzl2NEVLZXAvSHI3N1h5allyVitvdEdSQUlmRDBDRGN2ZjZhCnpHOFZSa3AyTXdhRW9IMFRmbVM2NU1ONEI4ZURvM1poWEUwR2hhMWwvem9laFM1WFQ1QXYyTkJCZ1RIZE4wSG4KYmEwUkhLVW5KdStsQzRuR1BWRE4zZ0k3U0RDdUFLTm9kZjJweUFKWkNTZkVmVThzOUtOejZEQWRHSnBRU3ZXaApmb0lsNlZ0ejJld1hSR0hjOCtNQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZMNHZYbHNJVTJ6cStqc1RrdWJXbVkxTEF6djdNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBTTVKMkYyRGdtZlA2bmxBU1RwcwoyZmR4Zk5jUExzNnJuUXZjRFFGNnFlT1gxSmZaL3JjN3d0bUlBSGQzMU0vTHp2YVhVRU1EelZFMHZZK2JZRFZzCjZtOTg3UkNEUWVPejBpVTI5UnQxUWRGR09FajMwYTVjRXh0cTNKMkQ1NmQvYXgxbE41YzNqU1hEOTNmSmtjTWkKQTM1VEI3cEFHRFI2NkRCWSsyTEpJZ2liREVzaEMyRDRPRlNZR3VVOFFScDBSdmg0ZGdPZG4rMDcxMkNLaDhCRQovNmtPNkVDUExtVGYyNXV5WGRMWEtETDhwbG92ZzdVSlVlTWppSnJsS1J3elFJdlpMYVV4bWhhZmpZVzFJL1hQCmJMdHVMcnhCSmRsOTVFWG5OSGxXZVNoNDBub2lhUXVUTkhjMW1QdERLU0RobHNhT3JvVlFFYWUwSWdPL1Eycm8KNGJvPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://C7BC76EDD111B0C3C5B5A6BD385AB8C9.gr7.us-east-1.eks.amazonaws.com   
+  name: geolocation-eks.us-east-1.eksctl.io
+contexts:
+- context:
+    cluster: geolocation-eks.us-east-1.eksctl.io
+    user: jenkins-ecr-eks@geolocation-eks.us-east-1.eksctl.io
+  name: jenkins-ecr-eks@geolocation-eks.us-east-1.eksctl.io
+current-context: jenkins-ecr-eks@geolocation-eks.us-east-1.eksctl.io
+kind: Config
+preferences: {}
+users:
+- name: jenkins-ecr-eks@geolocation-eks.us-east-1.eksctl.io
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - eks
+      - get-token
+      - --cluster-name
+      - geolocation-eks
+      - --region
+      - us-east-1
+      command: aws
+      env:
+      - name: AWS_STS_REGIONAL_ENDPOINTS
+        value: regional
+      provideClusterInfo: false
