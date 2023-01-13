@@ -1,7 +1,4 @@
-
-# Pull base image 
-From tomcat:8-jre8 
-
-# Maintainer 
-MAINTAINER "kserge2001@yahoo.fr" 
-#COPY ./webapp.war /usr/local/tomcat/webapps
+FROM openjdk:8
+ADD target/bioMedical-0.0.1-SNAPSHOT.jar bioMedical-0.0.1-SNAPSHOT.jar
+EXPOSE 8081
+ENTRYPOINT ["-java","-jar","bioMedical-0.0.1-SNAPSHOT.jar"]

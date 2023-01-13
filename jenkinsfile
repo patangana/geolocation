@@ -8,7 +8,7 @@ pipeline {
         maven 'M2_HOME'
     }
     environment {
-    registry = '119729913111.dkr.ecr.us-east-1.amazonaws.com/jenkins-ecr'
+    registry = '119729913111.dkr.ecr.us-east-1.amazonaws.com/geolocation_ecr_rep'
     registryCredential = 'jenkins-ecr'
     dockerimage = ''
   }
@@ -35,11 +35,11 @@ pipeline {
                 } 
             }
         }
-        stage('Deploy image') {
+        stage('Pushing to ECR') {
             steps{
                 script{ 
-                    docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
-                        dockerImage.push()
+                    sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin account_id.dkr.ecr.us-east-1.amazonaws.com' {
+                    sh 'docker push account_id.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo:latest'
                     }
                 }
             }
